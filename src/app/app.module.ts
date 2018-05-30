@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
 import { IAppState, rootReducer, INITIAL_STATE } from './store';
 
+import { MessasingModule } from './messasing/messasing.module';
+
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoDashboardComponent } from './todo-dashboard/todo-dashboard.component';
@@ -19,7 +21,8 @@ import { TodoDashboardComponent } from './todo-dashboard/todo-dashboard.componen
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgReduxModule
+    NgReduxModule,
+    MessasingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -28,7 +31,7 @@ export class AppModule {
   constructor(ngRedux: NgRedux<IAppState>, devTools: DevToolsExtension) {
     let enhancers = isDevMode() ? devTools.enhancer() : [];
     ngRedux.configureStore(
-      rootReducer, 
+      rootReducer,
       INITIAL_STATE,
       [],
       [enhancers]);

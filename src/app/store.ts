@@ -1,4 +1,4 @@
-import { REMOVE_ITEM, ADD_ITEM, DELETE_ALL } from './actions';
+import { REMOVE_ITEM, ADD_ITEM, DELETE_ALL, INCREMENT, DECREMENT } from './actions';
 import { tassign } from 'tassign';
 import { debug } from 'util';
 import { stat } from 'fs';
@@ -6,11 +6,13 @@ import { stat } from 'fs';
 export interface IAppState {
   todoList: Array<any>;
   updateDate: number;
+  newMessages: number;
 }
 
 export const INITIAL_STATE: IAppState = {
     todoList: [],
     updateDate: null,
+    newMessages: 0,
 };
 
 export function rootReducer(state: IAppState, action): IAppState {
@@ -36,6 +38,14 @@ export function rootReducer(state: IAppState, action): IAppState {
           return tassign(state, {
             todoList: [],
             updateDate: Date.now(),
+          });
+        case INCREMENT:
+          return tassign(state, {
+            newMessages: state.newMessages + 1,
+          });
+        case DECREMENT:
+          return tassign(state, {
+            newMessages: state.newMessages - 1,
           });
     }
 
