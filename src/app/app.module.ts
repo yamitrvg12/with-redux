@@ -4,25 +4,23 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
 import { IAppState, rootReducer, INITIAL_STATE } from './store';
-
+// Modules
 import { MessasingModule } from './messasing/messasing.module';
-
+import { TaskingModule } from './tasking/tasking.module';
+// Components
 import { AppComponent } from './app.component';
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { TodoDashboardComponent } from './todo-dashboard/todo-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoListComponent,
-    TodoDashboardComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     NgReduxModule,
-    MessasingModule
+    MessasingModule,
+    TaskingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

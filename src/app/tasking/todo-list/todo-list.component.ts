@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgRedux, select } from 'ng2-redux';
-import { IAppState } from '../store';
-import { ADD_ITEM, REMOVE_ITEM } from '../actions';
+import { IAppState } from '../../store';
+import { ADD_ITEM, REMOVE_ITEM } from '../../actions';
 
 @Component({
   selector: 'app-todo-list',
