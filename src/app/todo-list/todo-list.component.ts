@@ -14,8 +14,10 @@ export class TodoListComponent {
   constructor(private ngRedux: NgRedux<IAppState>) {
   }
 
-  addItem(input:HTMLInputElement) {
-    if (!input.value) return;
+  addItem(input: HTMLInputElement) {
+    if (!input.value) {
+      return;
+    };
 
     this.ngRedux.dispatch({ type: ADD_ITEM, title: input.value });
     input.value = '';
