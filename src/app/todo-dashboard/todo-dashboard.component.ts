@@ -10,6 +10,7 @@ import { DELETE_ALL } from '../actions';
 })
 export class TodoDashboardComponent {
   @select() todoList;
+  @select() updateDate;
   // Read the comment in TodoService
   constructor(private ngRedux: NgRedux<IAppState>) {
   }

@@ -5,24 +5,38 @@ import { stat } from 'fs';
 
 export interface IAppState {
   todoList: Array<any>;
+  updateDate: number;
 }
 
 export const INITIAL_STATE: IAppState = {
-    todoList: []
+    todoList: [],
+    updateDate: null,
 };
 
 export function rootReducer(state: IAppState, action): IAppState {
     switch (action.type) {
         case ADD_ITEM:
-          return {
-            todoList: state.todoList.concat({ title: action.title,
-            id: state.todoList.length + 1
-          })};
+          const updateTodoItem = {
+            title: action.title,
+            id: state.todoList.length + 1,
+          };
+
+          return tassign(state, {
+            todoList: state.todoList.concat(updateTodoItem),
+            updateDate: Date.now(),
+          });
         case REMOVE_ITEM:
-          const target = state.todoList.filter(item => item.id !== action.id);
-          return tassign(state, { todoList: target });
+          const removeItem = state.todoList.filter(item => item.id !== action.id);
+
+          return tassign(state, {
+            todoList: removeItem,
+            updateDate: Date.now(),
+          });
         case DELETE_ALL:
-          return tassign(state, { todoList: [] });
+          return tassign(state, {
+            todoList: [],
+            updateDate: Date.now(),
+          });
     }
 
     return state;
