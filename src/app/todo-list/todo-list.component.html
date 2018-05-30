@@ -1,10 +1,10 @@
 
 <h1>Todo List</h1>
-<input type="text">
-<button>Add</button>
+<input type="text" #element>
+<button (click)="addItem(element)">Add</button>
 <ul>
-  <li>
-    <span>title</span> 
-    <button>Remove</button>
+  <li *ngFor="let item of todoList | async">
+    <span>{{item.title}}</span> 
+    <button (click)="removeItem(item)">Remove</button>
   </li>
 </ul>
