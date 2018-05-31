@@ -1,53 +1,19 @@
-import { REMOVE_ITEM, ADD_ITEM, DELETE_ALL, INCREMENT, DECREMENT } from './actions';
 import { tassign } from 'tassign';
-import { debug } from 'util';
-import { stat } from 'fs';
+import { combineReducers } from 'redux';
+import { ITaskingState, TASKING_INITIAL_STATE, taskingReducer } from './tasking/store';
+import { IMessagingState, MESSAGING_INITIAL_STATE, messagingReducer } from './messasing/store';
 
 export interface IAppState {
-  todoList: Array<any>;
-  updateDate: number;
-  newMessages: number;
+  tasking: ITaskingState;
+  messages: IMessagingState;
 }
 
 export const INITIAL_STATE: IAppState = {
-    todoList: [],
-    updateDate: null,
-    newMessages: 0,
+  tasking: TASKING_INITIAL_STATE,
+  messages: MESSAGING_INITIAL_STATE,
 };
 
-export function rootReducer(state: IAppState, action): IAppState {
-    switch (action.type) {
-        case ADD_ITEM:
-          const updateTodoItem = {
-            title: action.title,
-            id: state.todoList.length + 1,
-          };
-
-          return tassign(state, {
-            todoList: state.todoList.concat(updateTodoItem),
-            updateDate: Date.now(),
-          });
-        case REMOVE_ITEM:
-          const removeItem = state.todoList.filter(item => item.id !== action.id);
-
-          return tassign(state, {
-            todoList: removeItem,
-            updateDate: Date.now(),
-          });
-        case DELETE_ALL:
-          return tassign(state, {
-            todoList: [],
-            updateDate: Date.now(),
-          });
-        case INCREMENT:
-          return tassign(state, {
-            newMessages: state.newMessages + 1,
-          });
-        case DECREMENT:
-          return tassign(state, {
-            newMessages: state.newMessages - 1,
-          });
-    }
-
-    return state;
-}
+export const rootReducer = combineReducers({
+  tasking: taskingReducer,
+  messages: messagingReducer,
+});

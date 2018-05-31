@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux, select } from 'ng2-redux';
 import { IAppState } from '../../store';
-import { INCREMENT, DECREMENT } from '../../actions';
+import { INCREMENT, DECREMENT } from '../actions';
 
 @Component({
   selector: 'crew-counter',
@@ -9,7 +9,7 @@ import { INCREMENT, DECREMENT } from '../../actions';
   styleUrls: ['./counter.component.css']
 })
 export class CounterComponent implements OnInit {
-  @select() newMessages;
+  @select(s => s.messages.newMessages) newMessages;
 
   constructor(private ngRedux: NgRedux<IAppState>) { }
 
@@ -23,7 +23,7 @@ export class CounterComponent implements OnInit {
   decrement() {
     const getState = this.ngRedux.getState();
 
-    if (getState.newMessages > 0) {
+    if (getState.messages.newMessages > 0) {
       this.ngRedux.dispatch({ type: DECREMENT });
     }
   }

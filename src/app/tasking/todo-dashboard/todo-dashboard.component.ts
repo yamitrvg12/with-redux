@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { select, NgRedux } from 'ng2-redux';
 import { IAppState } from '../../store';
-import { DELETE_ALL } from '../../actions';
+import { DELETE_ALL } from '../actions';
 
 @Component({
   selector: 'app-todo-dashboard',
@@ -9,8 +9,8 @@ import { DELETE_ALL } from '../../actions';
   styleUrls: ['./todo-dashboard.component.css']
 })
 export class TodoDashboardComponent {
-  @select() todoList;
-  @select() updateDate;
+  @select(s => s.tasking.todoList) todoList;
+  @select(s => s.tasking.updateDate) updateDate;
   // Read the comment in TodoService
   constructor(private ngRedux: NgRedux<IAppState>) {
   }
@@ -18,7 +18,7 @@ export class TodoDashboardComponent {
   deleteAll() {
     const getState = this.ngRedux.getState();
 
-    if (getState.todoList.length > 0) {
+    if (getState.tasking.todoList.length > 0) {
       this.ngRedux.dispatch({ type: DELETE_ALL });
     }
   }
